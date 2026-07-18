@@ -3,6 +3,13 @@
 A to-do list REST API built with **FastAPI** (Python). Full CRUD on an in-memory list, with automatic Swagger UI at `/docs`.
 
 ---
+### First setup virtual environment
+
+# using venv
+python -m venv venv
+
+# activate
+Scripts\activate
 
 ## Install & run
 
@@ -84,6 +91,37 @@ content-type: application/json
 ## What happens when you restart the server?
 
 All tasks disappear — the list lives only in RAM. The three seed tasks reload, but anything you created is gone. This is why databases exist (Week 3).
+
+---
+
+## API testing screenshots
+
+### 1. API landing page
+![API landing page](assests/1.png)
+
+### 2. Swagger UI
+![Swagger UI](assests/2_SwaggerUI.png)
+
+### 3. Health check endpoint
+![Health check endpoint](assests/3_get_health_check.png)
+
+### 4. Get all tasks
+![Get all tasks](assests/4_get_tasks.png)
+
+### 5. Create a new task
+![Create a new task](assests/5_post_tasks.png)
+
+### 6. Get a task by ID
+![Get a task by ID](assests/6_get_tasks_with_id.png)
+
+### 7. Update a task
+![Update a task](assests/7_updating_tasks.png)
+
+### 8. Delete a task by ID
+![Delete a task by ID](assests/8_delete_with_id.png)
+
+### 9. Get statistics
+![Get statistics](assests/9_get_statistics.png)
 
 ---
 
