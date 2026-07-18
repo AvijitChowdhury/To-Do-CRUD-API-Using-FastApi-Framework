@@ -1,47 +1,79 @@
-# Task API — FlyRank Internship W2A1
+# Task API — FlyRank AI Internship Week 2 Assignment
 
-A to-do list REST API built with **FastAPI** (Python). Full CRUD on an in-memory list, with automatic Swagger UI at `/docs`.
+This repository contains a lightweight REST API for managing tasks. It was built as my first hands-on assignment during the FlyRank AI internship program, focusing on backend development fundamentals with FastAPI.
 
----
-### First setup virtual environment
+## Overview
 
-# using venv
-python -m venv venv
+The Task API is a simple to-do application that supports full CRUD operations using an in-memory list. It demonstrates core API concepts such as routing, request handling, JSON responses, and interactive documentation through Swagger UI.
 
-# activate
-Scripts\activate
+## Features
 
-## Install & run
+- Create, read, update, and delete tasks
+- Retrieve task statistics
+- Health check endpoint for monitoring
+- Automatic API documentation at `/docs`
+- Lightweight setup with Python and FastAPI
 
-```bash
-# 1. Install dependencies (one-time)
-pip install fastapi uvicorn
+## Tech Stack
 
-# 2. Start the server
-uvicorn main:app --reload
+- Python
+- FastAPI
+- Uvicorn
 
-# Server is now live at http://localhost:8000
-# Swagger UI:        http://localhost:8000/docs
+## Project Structure
+
+```text
+todo-api/
+├── main.py      # API routes and application logic
+└── README.md    # Project documentation
 ```
 
----
+## Setup Instructions
 
-## Endpoints
+### 1. Create a virtual environment
 
-| Method | Path | Status | Description |
-|--------|------|--------|-------------|
-| GET | `/` | 200 | API info |
-| GET | `/health` | 200 | Health check |
-| GET | `/tasks` | 200 | List all tasks |
-| GET | `/tasks/{id}` | 200 / 404 | Get one task |
-| POST | `/tasks` | 201 / 400 | Create a task |
-| PUT | `/tasks/{id}` | 200 / 400 / 404 | Update a task |
-| DELETE | `/tasks/{id}` | 204 / 404 | Delete a task |
-| GET | `/stats` | 200 | Task statistics |
+```bash
+python -m venv venv
+```
 
----
+### 2. Activate the environment
 
-## curl examples
+On Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install fastapi uvicorn
+```
+
+### 4. Run the application
+
+```bash
+uvicorn main:app --reload
+```
+
+The API will be available at:
+- http://localhost:8000
+- Swagger UI: http://localhost:8000/docs
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/` | API information |
+| GET | `/health` | Health check |
+| GET | `/tasks` | Retrieve all tasks |
+| GET | `/tasks/{id}` | Retrieve a single task |
+| POST | `/tasks` | Create a new task |
+| PUT | `/tasks/{id}` | Update an existing task |
+| DELETE | `/tasks/{id}` | Delete a task |
+| GET | `/stats` | Retrieve task statistics |
+
+## Example Requests
 
 ```bash
 # List all tasks
@@ -55,7 +87,7 @@ curl -i -X POST http://localhost:8000/tasks \
   -H "Content-Type: application/json" \
   -d '{"title": "Buy milk"}'
 
-# Update task 1 — mark it done
+# Update task 1
 curl -i -X PUT http://localhost:8000/tasks/1 \
   -H "Content-Type: application/json" \
   -d '{"done": true}'
@@ -63,38 +95,24 @@ curl -i -X PUT http://localhost:8000/tasks/1 \
 # Delete task 2
 curl -i -X DELETE http://localhost:8000/tasks/2
 
-# Stats
+# Get statistics
 curl -i http://localhost:8000/stats
-
-# 404 example
-curl -i http://localhost:8000/tasks/999
-
-# 400 example (missing title)
-curl -i -X POST http://localhost:8000/tasks \
-  -H "Content-Type: application/json" \
-  -d '{}'
 ```
 
----
+## Sample Response
 
-## Sample curl -i output
-
-```
+```http
 HTTP/1.1 201 Created
 content-type: application/json
 
 {"id":4,"title":"Buy milk","done":false}
 ```
 
----
+## Notes
 
-## What happens when you restart the server?
+The task list is stored in memory, so all data will be lost when the server restarts. The application reloads the initial seed tasks on startup, which makes it ideal for learning and testing API behavior.
 
-All tasks disappear — the list lives only in RAM. The three seed tasks reload, but anything you created is gone. This is why databases exist (Week 3).
-
----
-
-## API testing screenshots
+## API Testing Screenshots
 
 ### 1. API landing page
 ![API landing page](assests/1.png)
@@ -123,12 +141,3 @@ All tasks disappear — the list lives only in RAM. The three seed tasks reload,
 ### 9. Get statistics
 ![Get statistics](assests/9_get_statistics.png)
 
----
-
-## Project structure
-
-```
-todo-api/
-├── main.py      # All routes and logic — under 120 lines
-└── README.md    # This file
-```
