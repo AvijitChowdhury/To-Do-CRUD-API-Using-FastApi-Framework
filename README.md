@@ -165,3 +165,23 @@ This simple architecture is ideal for learning REST API design because it separa
 ### 9. Get statistics
 ![Get statistics](assests/9_get_statistics.png)
 
+## Playwright Python POM Testing
+
+A dedicated Python-based Playwright suite was added under the [playwright_python](playwright_python) folder to exercise the API end to end using a page-object model structure.
+
+### Test structure
+
+```text
+playwright_python/
+├── pages/
+│   ├── base_page.py
+│   └── task_api_page.py
+└── tests/
+    └── test_api_workflow.py
+```
+
+### Screenshots captured by the Playwright POM workflow
+
+- Landing page screenshot: [assests/playwright_python/landing_page_python.png](assests/playwright_python/landing_page_python.png)
+- Swagger UI screenshot: [assests/playwright_python/swagger_ui_python.png](assests/playwright_python/swagger_ui_python.png)
+
