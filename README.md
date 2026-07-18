@@ -112,6 +112,30 @@ content-type: application/json
 
 The task list is stored in memory, so all data will be lost when the server restarts. The application reloads the initial seed tasks on startup, which makes it ideal for learning and testing API behavior.
 
+## Architecture Workflow
+
+The application follows a simple request-response flow that is easy to understand for a beginner backend developer.
+
+```mermaid
+flowchart LR
+    A[Client / Browser / curl] --> B[FastAPI App]
+    B --> C[Route Handler]
+    C --> D[In-Memory Task List]
+    D --> E[JSON Response]
+    E --> F[Swagger UI /docs]
+    F --> G[Developer Tests API]
+```
+
+### How the workflow works
+
+1. A client sends an HTTP request such as GET, POST, PUT, or DELETE to the FastAPI server.
+2. The FastAPI application receives the request and routes it to the appropriate endpoint handler.
+3. The handler processes the request and interacts with the in-memory task storage.
+4. The server returns a JSON response containing the requested data or a success/error status.
+5. The developer can test and inspect the API visually through Swagger UI at `/docs`.
+
+This simple architecture is ideal for learning REST API design because it separates concerns clearly: routing, business logic, and data handling remain easy to follow.
+
 ## API Testing Screenshots
 
 ### 1. API landing page
