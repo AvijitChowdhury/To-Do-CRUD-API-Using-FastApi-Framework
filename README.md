@@ -116,15 +116,69 @@ The task list is stored in memory, so all data will be lost when the server rest
 
 The Task API follows a simple end-to-end request lifecycle that can be understood as a sequence of client → API → business logic → storage → response.
 
+## 🏗️ System Architecture
+
 ```mermaid
 flowchart LR
-    A[Client / Browser / curl] --> B[FastAPI Application]
-    B --> C[Route Handler]
-    C --> D[In-Memory Task List]
-    D --> E[JSON Response]
-    E --> F[Swagger UI /docs]
-    F --> G[Playwright Python E2E Tests]
-    G --> H[Allure-style Test Evidence]
+
+    %% Client Layer
+    subgraph Client["🌐 Client Layer"]
+        A["👤 User<br/>Browser / cURL / Postman"]
+    end
+
+    %% API Layer
+    subgraph API["⚡ FastAPI Application"]
+        B["🚀 FastAPI Server"]
+        C["🛣️ API Routes"]
+    end
+
+    %% Business Logic
+    subgraph Logic["🧠 Business Logic"]
+        D["📋 Task CRUD Logic"]
+        E["✅ Request Validation<br/>(Pydantic)"]
+    end
+
+    %% Storage
+    subgraph Storage["💾 Data Storage"]
+        F["📦 In-Memory Task List<br/>Python List"]
+    end
+
+    %% Response
+    subgraph Response["📤 Response"]
+        G["📄 JSON Response"]
+        H["📚 Swagger UI<br/>/docs"]
+    end
+
+    %% Testing
+    subgraph Testing["🧪 Testing"]
+        I["🎭 Playwright Python"]
+        J["📸 Test Evidence"]
+    end
+
+    %% Flow
+    A -->|HTTP Request| B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> A
+
+    B -.-> H
+    I -.-> B
+    I --> J
+
+    %% Colors
+    style A fill:#D6EAF8,stroke:#2E86C1,color:#000
+    style B fill:#D5F5E3,stroke:#27AE60,color:#000
+    style C fill:#D5F5E3,stroke:#27AE60,color:#000
+    style D fill:#FCF3CF,stroke:#F1C40F,color:#000
+    style E fill:#FCF3CF,stroke:#F1C40F,color:#000
+    style F fill:#FADBD8,stroke:#C0392B,color:#000
+    style G fill:#E8DAEF,stroke:#8E44AD,color:#000
+    style H fill:#E8DAEF,stroke:#8E44AD,color:#000
+    style I fill:#EBDEF0,stroke:#6C3483,color:#000
+    style J fill:#EBDEF0,stroke:#6C3483,color:#000
 ```
 
 ### How the workflow works
