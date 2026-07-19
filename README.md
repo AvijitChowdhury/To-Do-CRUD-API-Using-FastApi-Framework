@@ -115,8 +115,13 @@ The task list is stored in memory, so all data will be lost when the server rest
 ## Architecture Workflow
 
 The Task API follows a simple end-to-end request lifecycle that can be understood as a sequence of client → API → business logic → storage → response.
-
 ## 🏗️ System Architecture
+
+<p align="center">
+  <img src="assests/architecture.png" alt="Task API Architecture" width="1000"/>
+</p>
+
+## 🏗️ System Architecture Mermaid Chart
 
 ```mermaid
 flowchart LR
